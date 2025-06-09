@@ -32,7 +32,7 @@ export function sendToWyoming(host: string, port: number, audioBuffer: Buffer): 
     console.log('[Wyoming] Conectando al socket...');
     client.connect(port, host, () => {
       console.log('[Wyoming] Enviando datos...');
-      client.write(fullPayload);
+      client.end(fullPayload);
     });
 
     client.on('data', (data) => {
