@@ -1,0 +1,17 @@
+services:
+  whisper:
+    image: rhasspy/wyoming-whisper
+    container_name: whisper
+    ports:
+      - "10300:10300"
+    command: --model tiny-int8 --language en
+
+
+  backend:
+    build: ./backend
+    container_name: voice-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - whisper
+    command: sh -c "npm run build && node dist/main"
